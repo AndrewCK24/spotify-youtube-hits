@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
-import ArtistProfile from "./SongList/ArtistProfile";
-import TopTracks from "./SongList/TopTracks";
-import ArtistList from "./SongList/ArtistList";
+import ArtistProfile from "./TrackList/ArtistProfile";
+import TopTracks from "./TrackList/TopTracks";
+import ArtistList from "./TrackList/ArtistList";
 
 const Container = styled.nav`
 	max-width: 24rem;
