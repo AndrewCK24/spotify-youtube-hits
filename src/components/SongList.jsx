@@ -1,20 +1,20 @@
 import styled from "@emotion/styled";
 
+import ArtistProfile from "./SongList/ArtistProfile";
+
 const Container = styled.div`
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
+	div {
+		border-radius: 1rem;
+	}
 `;
 
-const SongList = ({ songs }) => {
+const SongList = () => {
 	return (
 		<Container>
-			<h1>Song List</h1>
-			<ul>
-				{songs.map((song) => (
-					<li key={song.id}>{song.title}</li>
-				))}
-			</ul>
+			<ArtistProfile />
 		</Container>
 	);
 };

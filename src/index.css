@@ -1,21 +1,9 @@
 :root {
-	/* 字型設定 */
-	font-family: "Montserrat Alternates", "Noto Sans TC", "Noto Sans JP",
-		sans-serif;
-	font-weight: 400;
-	font-size: 16px;
-	line-height: 1.5;
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-text-size-adjust: 100%;
-
 	/* 顏色設定 */
 	--white-primary: #ffffff;
-	--white-secondary: #f9f9f9;
+	--white-secondary: #E6E6E6;
 	--black-primary: #191414;
-	--black-secondary: #1e1d21;
+	--black-secondary: #2A2222;
 	--gray-primary: #e4e4e4;
 	--gray-secondary: #bebebe;
 	--green-main: #1db954;
@@ -25,14 +13,32 @@
 	--red-dark: #b30000;
 	--red-light: #ff8080;
 
-	color-scheme: light dark;
+	/* 字型設定 */
+	color: var(--white-secondary);
+	font-family: "Montserrat Alternates", "Noto Sans TC", "Noto Sans JP",
+		sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	/* line-height: 1.5;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%; */
+
+	/* color-scheme: light dark; */
+
+	/* 基本設定 */
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
 * {
-  overscroll-behavior: none;
+	overscroll-behavior: none;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;
 		background-color: #ffffff;
@@ -43,4 +49,4 @@
 	button {
 		background-color: #f9f9f9;
 	}
-}
+} */
