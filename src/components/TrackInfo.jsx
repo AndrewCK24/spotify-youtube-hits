@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 
+import PopularityChart from "./TrackInfo/PopularityChart";
+import FeatureChart from "./TrackInfo/FeatureChart";
+
 const Container = styled.main`
 	max-width: 49rem;
 	min-width: 37rem;
@@ -9,6 +12,7 @@ const Container = styled.main`
 `;
 
 const ChartContainer = styled.div`
+	min-height: 18rem;
 	display: grid;
 	padding: 0.5rem;
 	border-radius: 1rem;
@@ -19,10 +23,10 @@ const TrackInfo = () => {
 	return (
 		<Container>
 			<ChartContainer>
-				<h2>Chart</h2>
+				<PopularityChart />
 			</ChartContainer>
 			<ChartContainer>
-				<h2>Chart</h2>
+				<FeatureChart />
 			</ChartContainer>
 		</Container>
 	);
