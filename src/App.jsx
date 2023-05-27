@@ -1,10 +1,10 @@
 import React from "react";
 
-import "normalize.css";
-import "./App.css";
+import SongList from "./components/SongList";
 
 const App = () => {
 	return <>
+    <SongList />
   </>;
 };
 
