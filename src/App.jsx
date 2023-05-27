@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 import TrackList from "./components/TrackList";
+import TrackInfo from "./components/TrackInfo";
 
 const Container = styled.div`
 	width: 90%;
@@ -17,7 +18,7 @@ const App = () => {
 	return (
 		<Container>
 			<TrackList />
-			<div />
+			<TrackInfo />
 		</Container>
 	);
 };
