@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 
+import { RiUserFollowFill } from "react-icons/ri";
+import { FaAssistiveListeningSystems, FaTemperatureHigh } from "react-icons/fa";
+
 const Container = styled.div`
 	border-radius: 1rem;
 	background-color: var(--black-secondary);
@@ -21,7 +24,7 @@ const ArtistImage = styled.img`
 const ArtistInfo = styled.div`
 	display: grid;
 	grid-template-rows: 1fr auto;
-  grid-row-gap: 0.25rem;
+	grid-row-gap: 0.25rem;
 	overflow: hidden;
 `;
 
@@ -34,11 +37,20 @@ const Name = styled.a`
 	overflow: hidden;
 	text-overflow: ellipsis;
 	&:hover {
-		color: var(--white-secondary);
+		text-shadow: 0 0 0.5rem var(--white-primary);
 	}
 `;
 
 const Details = styled.div`
+	display: grid;
+	align-items: start;
+`;
+
+const Text = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.25rem;
 	font-size: 0.75rem;
 	white-space: nowrap;
 	overflow: hidden;
@@ -49,7 +61,7 @@ const ArtistProfile = () => {
 	const artistData = {
 		img: "https://i.scdn.co/image/ab6761610000e5ebfc9d2abc85b6f4bef77f80ea",
 		name: "Pitbull",
-    spotifyUrl: "https://open.spotify.com/artist/0TnOYISbd1XYRBk9myaseg",
+		spotifyUrl: "https://open.spotify.com/artist/0TnOYISbd1XYRBk9myaseg",
 		followers: 123456789,
 		monthlyListeners: 123456789,
 		popularity: 83,
@@ -64,12 +76,18 @@ const ArtistProfile = () => {
 			<ArtistInfo>
 				<Name href={artistData.spotifyUrl}>{artistData.name}</Name>
 				<Details>
-					{artistData.followers.toLocaleString()} followers
-					<br />
-					{artistData.monthlyListeners.toLocaleString()} monthly listeners
-					<br />
-					Popularity: {artistData.popularity.toLocaleString()}
-					<br />
+					<Text>
+						<RiUserFollowFill />
+						{artistData.followers.toLocaleString()} followers
+					</Text>
+					<Text>
+						<FaAssistiveListeningSystems />
+						{artistData.monthlyListeners.toLocaleString()} (monthly)
+					</Text>
+					<Text>
+						<FaTemperatureHigh />
+						Popularity: {artistData.popularity.toLocaleString()}
+					</Text>
 				</Details>
 			</ArtistInfo>
 		</Container>
