@@ -7,6 +7,8 @@ import ArtistList from "./TrackList/ArtistList";
 const Container = styled.nav`
 	max-width: 24rem;
 	min-width: 18rem;
+	height: 95%;
+	padding: 2.5% 0;
 	display: grid;
 	grid-template-rows: auto 1fr auto;
 	grid-row-gap: 1rem;

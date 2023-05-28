@@ -1,13 +1,17 @@
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  border-radius: 1rem;
+	border-radius: 1rem;
 	display: grid;
-  /* grid-template-rows:; */
-  align-items: center;
-  overflow: hidden;
-  padding: 0.75rem;
+	grid-template-rows: auto 1fr;
+	align-items: center;
+	overflow: hidden;
+	padding: 0.75rem;
 	background-color: var(--black-secondary);
+`;
+
+const TrackContainer = styled.div`
+	display: grid;
 `;
 
 const Track = styled.button`
@@ -39,9 +43,11 @@ const trackData = [
 const TopTracks = () => {
 	return (
 		<Container>
-			{trackData.map((song, id) => (
-				<Track id={id}>{song}</Track>
-			))}
+			<TrackContainer>
+				{trackData.map((song, id) => (
+					<Track id={id}>{song}</Track>
+				))}
+			</TrackContainer>
 		</Container>
 	);
 };
