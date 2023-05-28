@@ -48,6 +48,10 @@ const FeatureSection = () => {
         <Title>Duration</Title>
         <Number>3:30</Number>
       </FeatureContainer>
+      <FeatureContainer>
+        <Title>Valence</Title>
+        <Number>0.772</Number>
+      </FeatureContainer>
 		</Container>
 	);
 };
