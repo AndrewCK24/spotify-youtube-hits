@@ -7,28 +7,25 @@ import FeatureChart from "./TrackInfo/FeatureChart";
 const Container = styled.main`
 	max-width: 49rem;
 	min-width: 37rem;
+	height: 95%;
+	padding: 2.5% 0;
+	overflow: hidden;
+	display: grid;
+	grid-template-rows: auto auto 1fr;
+	grid-row-gap: 1.5rem;
+`;
+
+const ChartSection = styled.section`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-column-gap: 1rem;
-  grid-row-gap: 1.5rem;
-`;
-
-const LeftContainer = styled.div`
-  max-width: 24rem;
-  min-width: 18rem;
-	grid-column: 1 / 2;
-	display: grid;
-`;
-
-const RightContainer = styled.div`
-  max-width: 24rem;
-  min-width: 18rem;
-	grid-column: 2 / 3;
-	display: grid;
 `;
 
 const ChartContainer = styled.div`
+	max-width: 24rem;
+	min-width: 18rem;
 	min-height: 18rem;
+	max-height: 20rem;
 	display: grid;
 	padding: 0.5rem;
 	border-radius: 1rem;
@@ -38,17 +35,15 @@ const ChartContainer = styled.div`
 const TrackInfo = () => {
 	return (
 		<Container>
-      <TrackDetail />
-			<LeftContainer>
+			<TrackDetail />
+			<ChartSection>
 				<ChartContainer>
 					<PopularityChart />
 				</ChartContainer>
-			</LeftContainer>
-			<RightContainer>
 				<ChartContainer>
 					<FeatureChart />
 				</ChartContainer>
-			</RightContainer>
+			</ChartSection>
 		</Container>
 	);
 };

@@ -8,6 +8,7 @@ const Container = styled.div`
 	height: 100vh;
 	display: grid;
 	padding: 0 5%;
+	overflow: hidden;
 	grid-template-columns: 1fr 2fr;
 	grid-column-gap: 1rem;
 	align-items: center;

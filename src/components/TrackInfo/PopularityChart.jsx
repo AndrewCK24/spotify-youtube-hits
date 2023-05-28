@@ -79,8 +79,8 @@ export default class Popularity extends PureComponent {
 		return (
 			<ResponsiveContainer width="100%" height="100%">
 				<ComposedChart
-					width={500}
-					height={400}
+					width={480}
+					height={320}
 					data={data}
 					margin={{
 						top: 16,
@@ -93,7 +93,7 @@ export default class Popularity extends PureComponent {
 					<XAxis
 						xAxisId={0}
 						dataKey="name"
-						label="Tracks"
+						label="Popularity of Top Tracks"
 						tick=""
 						scale="band"
 					/>

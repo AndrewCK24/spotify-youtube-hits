@@ -2,10 +2,12 @@ import styled from "@emotion/styled";
 
 const Container = styled.div`
 	border-radius: 1rem;
-	display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
-	grid-column-gap: 0.5rem;
+	display: flex;
+	flex-direction: row;
+  /* grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+	grid-column-gap: 0.5rem; */
   align-items: center;
+	justify-content: space-between;
 	overflow: hidden;
 	padding: 0.75rem;
 	background-color: var(--black-secondary);
@@ -24,8 +26,8 @@ const Artist = styled.a`
 `;
 
 const ArtistImage = styled.img`
-	width: 6rem;
-	height: 6rem;
+	max-width: 5rem;
+	max-height: 5rem;
 	border-radius: 50%;
 `;
 

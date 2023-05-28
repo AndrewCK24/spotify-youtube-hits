@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 import { RiAlbumLine } from "react-icons/ri";
 import { MdOutlineDateRange, MdAccessTime } from "react-icons/md";
 
-const Container = styled.div`
+const Container = styled.section`
+	max-height: 9rem;
 	grid-column: 1 / 3;
 	background-color: var(--black-secondary);
 	border-radius: 1rem;
