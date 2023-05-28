@@ -57,36 +57,29 @@ const Text = styled.div`
 	text-overflow: ellipsis;
 `;
 
-const ArtistProfile = () => {
-	const artistData = {
-		img: "https://i.scdn.co/image/ab6761610000e5ebfc9d2abc85b6f4bef77f80ea",
-		name: "Pitbull",
-		spotifyUrl: "https://open.spotify.com/artist/0TnOYISbd1XYRBk9myaseg",
-		followers: 123456789,
-		monthlyListeners: 123456789,
-		popularity: 83,
-	};
+const ArtistProfile = ({ artistData }) => {
+	const { name, url, img, genres, popularity, followers } = artistData;
 
 	return (
 		<Container>
 			<ArtistImage
-				src={artistData.img}
-				alt={artistData.name + " profile picture"}
+				src={img}
+				alt={name + " profile picture"}
 			/>
 			<ArtistInfo>
-				<Name href={artistData.spotifyUrl}>{artistData.name}</Name>
+				<Name href={url}>{name}</Name>
 				<Details>
 					<Text>
 						<RiUserFollowFill />
-						{artistData.followers.toLocaleString()} followers
+						{followers} followers
 					</Text>
 					<Text>
 						<FaAssistiveListeningSystems />
-						{artistData.monthlyListeners.toLocaleString()} (monthly)
+						{29865553} (monthly)
 					</Text>
 					<Text>
 						<FaTemperatureHigh />
-						Popularity: {artistData.popularity.toLocaleString()}
+						Popularity: {popularity}
 					</Text>
 				</Details>
 			</ArtistInfo>
