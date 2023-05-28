@@ -45,7 +45,7 @@ const TopTracks = () => {
 		<Container>
 			<TrackContainer>
 				{trackData.map((song, id) => (
-					<Track id={id}>{song}</Track>
+					<Track key={id}>{song}</Track>
 				))}
 			</TrackContainer>
 		</Container>

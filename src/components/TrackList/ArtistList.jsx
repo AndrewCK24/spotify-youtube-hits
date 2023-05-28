@@ -59,7 +59,7 @@ const ArtistList = () => {
 	return (
 		<Container>
 			{artistData.map((artist, id) => (
-				<Artist id={id} href="#">
+				<Artist key={id} href="#">
 					<ArtistImage src={artist.img} alt={artist.name} />
 					<ArtistName>{artist.name}</ArtistName>
 				</Artist>
