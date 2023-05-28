@@ -48,6 +48,13 @@ const TrackName = styled.a`
 	}
 `;
 
+const Details = styled.div`
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-column-gap: 1rem;
+	align-items: start;
+`;
+
 const AlbumName = styled.a`
 	width: fit-content;
 	display: flex;
@@ -78,7 +85,7 @@ const TrackDetail = () => {
 				<TrackName href="https://open.spotify.com/track/0d28khcov6AiegSCpG5TuT">
 					Feel Good Inc.
 				</TrackName>
-				<div>
+				<Details>
 					<AlbumName href="https://open.spotify.com/album/0bUTHlWbkSQysoM3VsWldT">
 						<RiAlbumLine />
 						Demon Days
@@ -87,7 +94,7 @@ const TrackDetail = () => {
 						<MdOutlineDateRange />
 						2005
 					</DetailText>
-				</div>
+				</Details>
 			</DetailContainer>
 		</Container>
 	);
