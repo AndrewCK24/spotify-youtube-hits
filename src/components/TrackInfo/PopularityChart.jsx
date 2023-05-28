@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import {
 	ComposedChart,
-	// Line,
 	Area,
 	Bar,
 	XAxis,
@@ -10,6 +9,8 @@ import {
 	Tooltip,
 	ResponsiveContainer,
 } from "recharts";
+
+import numberFormatter from "../../utils/numberFormatter";
 
 const data = [
 	{
@@ -62,18 +63,6 @@ const data = [
 	},
 ];
 
-const DataFormatter = (number) => {
-	if (number > 1000000000) {
-		return (number / 1000000000).toString() + "B";
-	} else if (number > 1000000) {
-		return (number / 1000000).toString() + "M";
-	} else if (number > 1000) {
-		return (number / 1000).toString() + "K";
-	} else {
-		return number.toString();
-	}
-};
-
 export default class Popularity extends PureComponent {
 	render() {
 		return (
@@ -91,7 +80,6 @@ export default class Popularity extends PureComponent {
 				>
 					<CartesianGrid stroke="#bebebe" />
 					<XAxis
-						xAxisId={0}
 						dataKey="name"
 						label="Popularity of Top Tracks"
 						tick=""
@@ -101,7 +89,7 @@ export default class Popularity extends PureComponent {
 						type="number"
 						dataKey="spotifyPlayCount"
 						name="Play Count"
-						tickFormatter={DataFormatter}
+						tickFormatter={numberFormatter}
 					/>
 					<Tooltip cursor={{ strokeDasharray: "3 3" }} />
 					<Area
@@ -110,12 +98,7 @@ export default class Popularity extends PureComponent {
 						fill="#148255"
 						stroke="#148255"
 					/>
-					<Bar
-						xAxisId={0}
-						dataKey="youtubeViews"
-						barSize={20}
-						fill="#ff0000"
-					/>
+					<Bar dataKey="youtubeViews" barSize={20} fill="#ff0000" />
 				</ComposedChart>
 			</ResponsiveContainer>
 		);
