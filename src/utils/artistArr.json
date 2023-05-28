@@ -1,0 +1,30 @@
+{
+  "artistArr": [
+    {
+      "name": "Gorillaz",
+      "id": "3AA28KZvwAUcZuOKwyblJQ",
+      "artistInfo": {
+        "followers": 10000000,
+        "monthlyListeners": 10000000,
+        "popularity": 100,
+        "genres": [
+          "alternative hip hop",
+          "modern rock",
+          "rock"
+        ],
+        "image": "https://i.scdn.co/image/ab6761610000e5eb88c7790dfeaee8b4595fc0e5"
+      },
+      "topTracks": [
+        {
+          "name": "Feel Good Inc.",
+          "id": "0d28khcov6AiegSCpG5TuT",
+          "album": {
+            "name": "Demon Days",
+            "id": "0bUTHlWbkSQysoM3VsWldT",
+            "image": "https://i.scdn.co/image/ab67616d0000b27319d85a472f328a6ed9b704cf"
+          }
+        }
+      ]
+    }
+  ]
+}
