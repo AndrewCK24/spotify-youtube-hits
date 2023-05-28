@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import {
 	ComposedChart,
-	Line,
+	// Line,
 	Area,
 	Bar,
 	XAxis,
@@ -97,25 +97,14 @@ export default class Popularity extends PureComponent {
 						tick=""
 						scale="band"
 					/>
-					<XAxis xAxisId={1} dataKey="name" hide />
-					<XAxis xAxisId={2} dataKey="name" hide />
 					<YAxis
-						yAxisId="left"
 						type="number"
 						dataKey="spotifyPlayCount"
 						name="Play Count"
 						tickFormatter={DataFormatter}
 					/>
-					<YAxis
-						yAxisId="right"
-						type="number"
-						dataKey="spotifyPopularity"
-						name="Popularity"
-						orientation="right"
-					/>
 					<Tooltip cursor={{ strokeDasharray: "3 3" }} />
 					<Area
-						yAxisId="left"
 						dataKey="spotifyPlayCount"
 						type="monotone"
 						fill="#148255"
@@ -123,30 +112,9 @@ export default class Popularity extends PureComponent {
 					/>
 					<Bar
 						xAxisId={0}
-						yAxisId="left"
 						dataKey="youtubeViews"
 						barSize={20}
 						fill="#ff0000"
-					/>
-					<Line
-						yAxisId="right"
-						type="monotone"
-						dataKey="spotifyPopularity"
-						stroke="#1db954"
-					/>
-					<Bar
-						xAxisId={1}
-						yAxisId="left"
-						dataKey="youtubeLikes"
-						barSize={20}
-						fill="#b30000"
-					/>
-					<Bar
-						xAxisId={2}
-						yAxisId="left"
-						dataKey="youtubeComments"
-						barSize={20}
-						fill="#ff8080"
 					/>
 				</ComposedChart>
 			</ResponsiveContainer>
