@@ -75,7 +75,7 @@ export default class Popularity extends PureComponent {
 						top: 16,
 						right: 4,
 						bottom: 4,
-						left: 4,
+						left: 16,
 					}}
 				>
 					<CartesianGrid stroke="#bebebe" />
@@ -97,8 +97,9 @@ export default class Popularity extends PureComponent {
 						type="monotone"
 						fill="#148255"
 						stroke="#148255"
+						dot={true}
 					/>
-					<Bar dataKey="youtubeViews" barSize={20} fill="#ff0000" />
+					<Bar dataKey="youtubeViews" barSize={20} fill="#b30000" />
 				</ComposedChart>
 			</ResponsiveContainer>
 		);

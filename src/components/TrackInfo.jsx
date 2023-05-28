@@ -6,7 +6,7 @@ import FeatureChart from "./TrackInfo/FeatureChart";
 import FeatureSection from "./TrackInfo/FeatureSection";
 
 const Container = styled.main`
-	max-width: 49rem;
+	/* max-width: 49rem; */
 	min-width: 37rem;
 	height: 95%;
 	padding: 2.5% 0;
@@ -23,7 +23,7 @@ const ChartSection = styled.section`
 `;
 
 const ChartContainer = styled.div`
-	max-width: 24rem;
+	/* max-width: 24rem; */
 	min-width: 18rem;
 	min-height: 18rem;
 	max-height: 20rem;
