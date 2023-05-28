@@ -10,7 +10,7 @@ const Container = styled.main`
 	min-width: 37rem;
 	height: 95%;
 	padding: 2.5% 0;
-	overflow: hidden;
+	overflow-y: scroll;
 	display: grid;
 	grid-template-rows: auto auto 1fr;
 	grid-row-gap: 1.5rem;

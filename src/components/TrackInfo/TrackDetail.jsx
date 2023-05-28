@@ -5,6 +5,7 @@ import { MdOutlineDateRange, MdAccessTime } from "react-icons/md";
 
 const Container = styled.section`
 	max-height: 9rem;
+	min-height: 7.5rem;
 	grid-column: 1 / 3;
 	background-color: var(--black-secondary);
 	border-radius: 1rem;
