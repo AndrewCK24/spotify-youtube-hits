@@ -21,7 +21,7 @@ const Track = styled.button`
 	text-overflow: ellipsis;
 	&:hover,
 	&.toggled {
-		text-shadow: 0 0 0.5rem var(--primary-white);
+		text-shadow: 0 0 0.5rem var(--white-primary);
 		font-weight: 700;
 		cursor: pointer;
 	}

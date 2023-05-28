@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 
+import TrackDetail from "./TrackInfo/TrackDetail";
 import PopularityChart from "./TrackInfo/PopularityChart";
 import FeatureChart from "./TrackInfo/FeatureChart";
 
@@ -9,6 +10,21 @@ const Container = styled.main`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-column-gap: 1rem;
+  grid-row-gap: 1.5rem;
+`;
+
+const LeftContainer = styled.div`
+  max-width: 24rem;
+  min-width: 18rem;
+	grid-column: 1 / 2;
+	display: grid;
+`;
+
+const RightContainer = styled.div`
+  max-width: 24rem;
+  min-width: 18rem;
+	grid-column: 2 / 3;
+	display: grid;
 `;
 
 const ChartContainer = styled.div`
@@ -22,12 +38,17 @@ const ChartContainer = styled.div`
 const TrackInfo = () => {
 	return (
 		<Container>
-			<ChartContainer>
-				<PopularityChart />
-			</ChartContainer>
-			<ChartContainer>
-				<FeatureChart />
-			</ChartContainer>
+      <TrackDetail />
+			<LeftContainer>
+				<ChartContainer>
+					<PopularityChart />
+				</ChartContainer>
+			</LeftContainer>
+			<RightContainer>
+				<ChartContainer>
+					<FeatureChart />
+				</ChartContainer>
+			</RightContainer>
 		</Container>
 	);
 };
