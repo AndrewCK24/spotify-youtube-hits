@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import TrackDetail from "./TrackInfo/TrackDetail";
 import PopularityChart from "./TrackInfo/PopularityChart";
 import FeatureChart from "./TrackInfo/FeatureChart";
+import FeatureSection from "./TrackInfo/FeatureSection";
 
 const Container = styled.main`
 	max-width: 49rem;
@@ -44,6 +45,7 @@ const TrackInfo = () => {
 					<FeatureChart />
 				</ChartContainer>
 			</ChartSection>
+			<FeatureSection />
 		</Container>
 	);
 };
