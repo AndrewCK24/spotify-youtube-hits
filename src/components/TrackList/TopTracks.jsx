@@ -19,23 +19,21 @@ const Track = styled.button`
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	&:hover {
+	&:hover,
+	&.toggled {
 		text-shadow: 0 0 0.5rem var(--primary-white);
 		font-weight: 700;
+		cursor: pointer;
 	}
 `;
 
 const trackData = [
-	"Timber",
-	"I Know You Want Me (Calle Ocho)",
-	"Give Me Everything (feat. Ne-Yo, Afrojack & Nayer)",
-	"Feel This Moment (feat. Christina Aguilera)",
-	"Rain Over Me (feat. Marc Anthony)",
-	"Hotel Room Service",
-	"Hey Baby (Drop It to the Floor) [feat. T-Pain]",
-	"International Love (feat. Chris Brown)",
-	"Don't Stop the Party (feat. TJR)",
-	"Fireball (feat. John Ryan)",
+	"Feel Good Inc.",
+	"Clint Eastwood",
+	"Rhinestone Eyes",
+	"On Melancholy Hill",
+	"DARE",
+	"She's My Collar (feat. Kali Uchis)",
 ];
 
 const TopTracks = () => {

@@ -8,59 +8,73 @@ import {
 	YAxis,
 	CartesianGrid,
 	Tooltip,
-	Legend,
-	Scatter,
 	ResponsiveContainer,
 } from "recharts";
 
 const data = [
 	{
-		name: "Page A",
-		uv: 590,
-		pv: 800,
-		amt: 1400,
-		cnt: 490,
+		name: "Feel Good Inc.",
+		spotifyPlayCount: 1099787791,
+		spotifyPopularity: 85,
+		youtubeViews: 693555221,
+		youtubeLikes: 6220896,
+		youtubeComments: 169907,
 	},
 	{
-		name: "Page B",
-		uv: 868,
-		pv: 967,
-		amt: 1506,
-		cnt: 590,
+		name: "Clint Eastwood",
+		spotifyPlayCount: 648976189,
+		spotifyPopularity: 72,
+		youtubeViews: 618480958,
+		youtubeLikes: 6197318,
+		youtubeComments: 155930,
 	},
 	{
-		name: "Page C",
-		uv: 1397,
-		pv: 1098,
-		amt: 989,
-		cnt: 350,
+		name: "Rhinestone Eyes",
+		spotifyPlayCount: 337684069,
+		spotifyPopularity: 80,
+		youtubeViews: 72011645,
+		youtubeLikes: 1079128,
+		youtubeComments: 31003,
 	},
 	{
-		name: "Page D",
-		uv: 1480,
-		pv: 1200,
-		amt: 1228,
-		cnt: 480,
+		name: "On Melancholy Hill",
+		spotifyPlayCount: 459395657,
+		spotifyPopularity: 79,
+		youtubeViews: 211754952,
+		youtubeLikes: 1788577,
+		youtubeComments: 55229,
 	},
 	{
-		name: "Page E",
-		uv: 1520,
-		pv: 1108,
-		amt: 1100,
-		cnt: 460,
+		name: "DARE",
+		spotifyPlayCount: 342909912,
+		spotifyPopularity: 77,
+		youtubeViews: 259021161,
+		youtubeLikes: 1844658,
+		youtubeComments: 72008,
 	},
 	{
-		name: "Page F",
-		uv: 1400,
-		pv: 680,
-		amt: 1700,
-		cnt: 380,
+		name: "She's My Collar (feat. Kali Uchis)",
+		spotifyPlayCount: 172619797,
+		spotifyPopularity: 75,
+		youtubeViews: 1010982,
+		youtubeLikes: 17675,
+		youtubeComments: 260,
 	},
 ];
 
-export default class Example extends PureComponent {
-	static demoUrl = "https://codesandbox.io/s/simple-composed-chart-h9zif";
+const DataFormatter = (number) => {
+	if (number > 1000000000) {
+		return (number / 1000000000).toString() + "B";
+	} else if (number > 1000000) {
+		return (number / 1000000).toString() + "M";
+	} else if (number > 1000) {
+		return (number / 1000).toString() + "K";
+	} else {
+		return number.toString();
+	}
+};
 
+export default class Popularity extends PureComponent {
 	render() {
 		return (
 			<ResponsiveContainer width="100%" height="100%">
@@ -69,21 +83,71 @@ export default class Example extends PureComponent {
 					height={400}
 					data={data}
 					margin={{
-						top: 20,
-						right: 20,
-						bottom: 20,
-						left: 20,
+						top: 16,
+						right: 4,
+						bottom: 4,
+						left: 4,
 					}}
 				>
-					<CartesianGrid stroke="#f5f5f5" />
-					<XAxis dataKey="name" scale="band" />
-					<YAxis />
-					<Tooltip />
-					<Legend />
-					<Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
-					<Bar dataKey="pv" barSize={20} fill="#413ea0" />
-					<Line type="monotone" dataKey="uv" stroke="#ff7300" />
-					<Scatter dataKey="cnt" fill="red" />
+					<CartesianGrid stroke="#bebebe" />
+					<XAxis
+						xAxisId={0}
+						dataKey="name"
+						label="Tracks"
+						tick=""
+						scale="band"
+					/>
+					<XAxis xAxisId={1} dataKey="name" hide />
+					<XAxis xAxisId={2} dataKey="name" hide />
+					<YAxis
+						yAxisId="left"
+						type="number"
+						dataKey="spotifyPlayCount"
+						name="Play Count"
+						tickFormatter={DataFormatter}
+					/>
+					<YAxis
+						yAxisId="right"
+						type="number"
+						dataKey="spotifyPopularity"
+						name="Popularity"
+						orientation="right"
+					/>
+					<Tooltip cursor={{ strokeDasharray: "3 3" }} />
+					<Area
+						yAxisId="left"
+						dataKey="spotifyPlayCount"
+						type="monotone"
+						fill="#148255"
+						stroke="#148255"
+					/>
+					<Bar
+						xAxisId={0}
+						yAxisId="left"
+						dataKey="youtubeViews"
+						barSize={20}
+						fill="#ff0000"
+					/>
+					<Line
+						yAxisId="right"
+						type="monotone"
+						dataKey="spotifyPopularity"
+						stroke="#1db954"
+					/>
+					<Bar
+						xAxisId={1}
+						yAxisId="left"
+						dataKey="youtubeLikes"
+						barSize={20}
+						fill="#b30000"
+					/>
+					<Bar
+						xAxisId={2}
+						yAxisId="left"
+						dataKey="youtubeComments"
+						barSize={20}
+						fill="#ff8080"
+					/>
 				</ComposedChart>
 			</ResponsiveContainer>
 		);

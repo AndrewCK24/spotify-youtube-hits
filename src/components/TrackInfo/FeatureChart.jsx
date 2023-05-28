@@ -10,60 +10,57 @@ import {
 } from "recharts";
 
 const data = [
-	{
-		subject: "Math",
-		A: 120,
-		B: 110,
-		fullMark: 150,
-	},
-	{
-		subject: "Chinese",
-		A: 98,
-		B: 130,
-		fullMark: 150,
-	},
-	{
-		subject: "English",
-		A: 86,
-		B: 130,
-		fullMark: 150,
-	},
-	{
-		subject: "Geography",
-		A: 99,
-		B: 100,
-		fullMark: 150,
-	},
-	{
-		subject: "Physics",
-		A: 85,
-		B: 90,
-		fullMark: 150,
-	},
-	{
-		subject: "History",
-		A: 65,
-		B: 85,
-		fullMark: 150,
-	},
+  {
+    feature: "Danceability",
+    value: 0.818,
+    fullMark: 1,
+  },
+  {
+    feature: "Energy",
+    value: 0.705,
+    fullMark: 1,
+  },
+  {
+    feature: "Speechiness",
+    value: 0.177,
+    fullMark: 1,
+  },
+  {
+    feature: "Acousticness",
+    value: 0.00836,
+    fullMark: 1,
+  },
+  {
+    feature: "Instrumentalness",
+    value: 0.00233,
+    fullMark: 1,
+  },
+  {
+    feature: "Liveness",
+    value: 0.613,
+    fullMark: 1,
+  },
+  // {
+  //   feature: "Valence",
+  //   value: 0.772,
+  //   fullMark: 1,
+  // },
 ];
 
 export default class Example extends PureComponent {
-	static demoUrl = "https://codesandbox.io/s/simple-radar-chart-rjoc6";
-
 	render() {
 		return (
 			<ResponsiveContainer width="100%" height="100%">
 				<RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
 					<PolarGrid />
-					<PolarAngleAxis dataKey="subject" />
+					<PolarAngleAxis dataKey="feature" />
 					<PolarRadiusAxis />
 					<Tooltip />
 					<Radar
-						name="Mike"
-						dataKey="A"
-						stroke="#8884d8"
-						fill="#8884d8"
+						name="value"
+						dataKey="value"
+						stroke="#1db954"
+						fill="#1db954"
 						fillOpacity={0.6}
 					/>
 				</RadarChart>

@@ -11,8 +11,10 @@ const Container = styled.div`
 `;
 
 const ArtistImage = styled.img`
-	width: 6rem;
-	height: 6rem;
+	max-width: 6rem;
+	min-width: 4rem;
+	max-height: 6rem;
+	min-height: 4rem;
 	border-radius: 50%;
 `;
 
@@ -28,6 +30,9 @@ const Name = styled.a`
 	font-weight: 700;
 	color: var(--white-primary);
 	text-decoration: none;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	&:hover {
 		color: var(--white-secondary);
 	}
