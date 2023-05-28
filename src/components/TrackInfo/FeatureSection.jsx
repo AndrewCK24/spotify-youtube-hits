@@ -9,12 +9,11 @@ const Container = styled.section`
 	flex-wrap: wrap;
 	gap: 1rem;
 	justify-content: left;
-	align-items: top;
+	align-items: stretch;
 `;
 
 const FeatureContainer = styled.div`
-	max-width: 16rem;
-	min-width: 12rem;
+	flex: 1 1 12rem;
 	max-height: 12rem;
 	min-height: 8rem;
 	display: grid;
