@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 const currentArtistIDState = atom({
 	key: "currentArtistIDState",
-	default: "3AA28KZvwAUcZuOKwyblJQ",
+	default: "",
 });
 
 export default currentArtistIDState;

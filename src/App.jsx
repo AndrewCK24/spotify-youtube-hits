@@ -1,13 +1,15 @@
 import { useEffect } from "react";
-import styled from "@emotion/styled";
 import { useRecoilState } from "recoil";
+import styled from "@emotion/styled";
+
+// import global states
 import tokenState from "./recoil/atoms/tokenState";
 import currentArtistIDState from "./recoil/atoms/currentArtistIDState";
 import currentArtistDataState from "./recoil/atoms/currentArtistDataState";
 
-import passKeys from "./env";
 import TrackList from "./components/TrackList";
 import TrackInfo from "./components/TrackInfo";
+import passKeys from "./env";
 
 const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = passKeys();
 
@@ -31,9 +33,7 @@ const fetchToken = async (clientId, clientSecret) => {
 		},
 		body: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
 	});
-
 	const data = await response.json();
-	// console.log("Access Token:", data.access_token);
 	return data.access_token;
 };
 
@@ -61,13 +61,11 @@ const App = () => {
 	);
 
 	useEffect(() => {
-		const clientId = REACT_APP_CLIENT_ID;
-		const clientSecret = REACT_APP_CLIENT_SECRET;
-		fetchToken(clientId, clientSecret)
+		fetchToken(REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET)
 			.then((token) => {
 				setToken(token);
-				// setCurrentArtist("3AA28KZvwAUcZuOKwyblJQ");
-				console.log("Access Token:", token);
+				setCurrentArtistID("3AA28KZvwAUcZuOKwyblJQ");
+				console.log("Token:", token);
 			})
 			.catch((err) => console.log("Error when accessing token:", err));
 	}, [setToken]);
@@ -77,11 +75,10 @@ const App = () => {
 			fetchArtist(currentArtistID, token)
 				.then((data) => {
 					setCurrentArtistData(data);
-					console.log("Artist:", data);
 				})
 				.catch((err) => console.log("Error when fetching artist:", err));
 		}
-	}, [currentArtistID, token]);
+	}, [currentArtistID]);
 
 	return (
 		<Container>

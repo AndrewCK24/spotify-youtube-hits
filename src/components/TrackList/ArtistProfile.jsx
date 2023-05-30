@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import currentArtistDataState from "../../recoil/atoms/currentArtistDataState";
 
@@ -69,9 +69,10 @@ const ArtistProfile = () => {
 	);
 	const { name, external_urls, images, followers, popularity } =
 		currentArtistData;
-	useEffect(() => {
-		console.log("Artist:", currentArtistData);
-	}, [JSON.stringify(currentArtistData)]);
+
+	// useEffect(() => {
+	// 	console.log("Artist:", currentArtistData);
+	// }, [JSON.stringify(currentArtistData)]);
 
 	if (Object.keys(currentArtistData).length !== 0) {
 		return (
@@ -97,11 +98,7 @@ const ArtistProfile = () => {
 			</Container>
 		);
 	} else {
-		return (
-			<Container>
-				{/* <Skeleton /> */}
-			</Container>
-		);
+		return <Container>{/* <Skeleton /> */}</Container>;
 	}
 };
 
