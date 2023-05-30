@@ -18,28 +18,30 @@ const Container = styled.nav`
 `;
 
 const TrackList = () => {
-	// TODO: 解決 useArtist() 多次重覆 render 的問題
-	// TODO: 解決 img 無法正常顯示的問題
-	const { data, loading, error } = useArtist("3AA28KZvwAUcZuOKwyblJQ");
+	// // TODO: 解決 useArtist() 多次重覆 render 的問題
+	// // TODO: 解決 img 無法正常顯示的問題
+	// const { data, loading, error } = useArtist("3AA28KZvwAUcZuOKwyblJQ");
 	
-	let artistData = {};
+	// let artistData = {};
 
-	if (data) {
-		console.log("Artist:", data);
-		const fetchedData = {
-			name: data.name,
-			url: data.external_urls.spotify,
-			image: data.images[0].url,
-			genres: data.genres,
-			popularity: data.popularity,
-			followers: data.followers.total,
-		};
-		artistData = fetchedData;
-	}
+	// useEffect(() => {
+	// 	if (data) {
+	// 		console.log("Artist:", data);
+	// 		const fetchedData = {
+	// 			name: data.name,
+	// 			url: data.external_urls.spotify,
+	// 			image: data.images[0].url,
+	// 			genres: data.genres,
+	// 			popularity: data.popularity,
+	// 			followers: data.followers.total,
+	// 		};
+	// 		artistData = fetchedData;
+	// 	}
+	// }, [data]);
 
 	return (
 		<Container>
-			<ArtistProfile artistData={artistData} />
+			<ArtistProfile />
 			<TopTracks />
 			<ArtistList />
 		</Container>

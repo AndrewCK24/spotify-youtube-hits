@@ -1,6 +1,9 @@
+import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
-import { SpotifyApiContext } from "react-spotify-api";
+import { useRecoilState } from "recoil";
+import tokenState from "./recoil/atoms/tokenState";
+import currentArtistIDState from "./recoil/atoms/currentArtistIDState";
+import currentArtistDataState from "./recoil/atoms/currentArtistDataState";
 
 import passKeys from "./env";
 import TrackList from "./components/TrackList";
@@ -34,24 +37,57 @@ const fetchToken = async (clientId, clientSecret) => {
 	return data.access_token;
 };
 
+const fetchArtist = async (artistId, token) => {
+	const response = await fetch(
+		`https://api.spotify.com/v1/artists/${artistId}`,
+		{
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}
+	);
+	const data = await response.json();
+	console.log("Artist:", data);
+	return data;
+};
+
 const App = () => {
-	const [token, setToken] = useState("");
+	const [token, setToken] = useRecoilState(tokenState);
+	const [currentArtistID, setCurrentArtistID] =
+		useRecoilState(currentArtistIDState);
+	const [currentArtistData, setCurrentArtistData] = useRecoilState(
+		currentArtistDataState
+	);
 
 	useEffect(() => {
 		const clientId = REACT_APP_CLIENT_ID;
 		const clientSecret = REACT_APP_CLIENT_SECRET;
 		fetchToken(clientId, clientSecret)
-			.then((token) => setToken(token))
+			.then((token) => {
+				setToken(token);
+				// setCurrentArtist("3AA28KZvwAUcZuOKwyblJQ");
+				console.log("Access Token:", token);
+			})
 			.catch((err) => console.log("Error when accessing token:", err));
-	}, []);
+	}, [setToken]);
+
+	useEffect(() => {
+		if (token) {
+			fetchArtist(currentArtistID, token)
+				.then((data) => {
+					setCurrentArtistData(data);
+					console.log("Artist:", data);
+				})
+				.catch((err) => console.log("Error when fetching artist:", err));
+		}
+	}, [currentArtistID, token]);
 
 	return (
-		<SpotifyApiContext.Provider value={token}>
-			<Container>
-				<TrackList />
-				<TrackInfo />
-			</Container>
-		</SpotifyApiContext.Provider>
+		<Container>
+			<TrackList />
+			<TrackInfo />
+		</Container>
 	);
 };
 
