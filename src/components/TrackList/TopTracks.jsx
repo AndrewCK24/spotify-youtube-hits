@@ -1,4 +1,7 @@
 import styled from "@emotion/styled";
+import { useRecoilState } from "recoil";
+
+import currentTrackKeyState from "../../recoil/atoms/currentTrackKeyState";
 
 const Container = styled.div`
 	border-radius: 1rem;
@@ -41,11 +44,25 @@ const trackData = [
 ];
 
 const TopTracks = () => {
+	const [currentTrackKey, setCurrentTrackKey] =
+		useRecoilState(currentTrackKeyState);
+
+	const handleClick = (key) => {
+		console.log(`No. ${key} track clicked`);
+		setCurrentTrackKey(key);
+	};
+
 	return (
 		<Container>
 			<TrackContainer>
 				{trackData.map((song, id) => (
-					<Track key={id}>{song}</Track>
+					<Track
+						key={id}
+						className={currentTrackKey === id ? "toggled" : ""}
+						onClick={() => handleClick(id)}
+					>
+						{song}
+					</Track>
 				))}
 			</TrackContainer>
 		</Container>
