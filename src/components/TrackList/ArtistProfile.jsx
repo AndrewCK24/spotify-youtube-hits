@@ -73,23 +73,18 @@ const Text = styled.div`
 
 const ArtistProfile = () => {
 	const currentArtistData = useRecoilValue(currentArtistDataState);
-	const { name, external_urls, images, followers, popularity } =
-		currentArtistData;
-
-	// useEffect(() => {
-	// 	console.log("Artist:", currentArtistData);
-	// }, [JSON.stringify(currentArtistData)]);
+	const { name, url, img, followers, popularity } = currentArtistData;
 
 	if (Object.keys(currentArtistData).length !== 0) {
 		return (
 			<Container>
-				<ArtistImg src={images[0].url} alt={name + " profile picture"} />
+				<ArtistImg src={img} alt={name + " profile picture"} />
 				<ArtistInfo>
-					<Name href={external_urls.spotify}>{name}</Name>
+					<Name href={url}>{name}</Name>
 					<Details>
 						<Text>
 							<RiUserFollowFill />
-							{followers.total} followers
+							{followers} followers
 						</Text>
 						<Text>
 							<FaAssistiveListeningSystems />
