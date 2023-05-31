@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
+import { useRecoilValue } from "recoil";
 
+import currentTrackKeyState from "../../recoil/atoms/currentTrackKeyState";
 import { RiAlbumLine } from "react-icons/ri";
 import { MdOutlineDateRange, MdAccessTime } from "react-icons/md";
 
@@ -65,6 +67,7 @@ const Info = styled.div`
 	flex-wrap: wrap;
 	justify-content: start;
 	align-items: center;
+	gap: 0.5rem;
 `;
 
 const AlbumName = styled.a`
@@ -89,6 +92,9 @@ const DetailText = styled.div`
 `;
 
 const TrackDetail = () => {
+	// TODO: 將資料改為 getTrackByIdSelector 的資料
+	const currentTrackKey = useRecoilValue(currentTrackKeyState);
+
 	return (
 		<Container>
 			<AlbumImg
@@ -117,7 +123,7 @@ const TrackDetail = () => {
 					<Info>
 					<DetailText>
 						<MdOutlineDateRange />
-						2005
+						{currentTrackKey}
 					</DetailText>
 					</Info>
 				</Details>
