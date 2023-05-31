@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "@emotion/styled";
 
-// import global states
+// import shared states
 import tokenState from "./recoil/atoms/tokenState";
 import currentArtistIDState from "./recoil/atoms/currentArtistIDState";
 import currentArtistDataState from "./recoil/atoms/currentArtistDataState";
@@ -10,6 +10,7 @@ import currentArtistDataState from "./recoil/atoms/currentArtistDataState";
 import TrackList from "./components/TrackList";
 import TrackInfo from "./components/TrackInfo";
 import passKeys from "./env";
+import { fetchSpArtist, fetchDbArtist } from "./hooks/useArtistAPI";
 
 const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = passKeys();
 
@@ -37,36 +38,11 @@ const fetchToken = async (clientId, clientSecret) => {
 	return data.access_token;
 };
 
-const fetchSpArtist = async (artistId, token) => {
-	const response = await fetch(
-		`https://api.spotify.com/v1/artists/${artistId}`,
-		{
-			method: "GET",
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		}
-	);
-	const data = await response.json();
-	const { name, external_urls, images, followers, popularity } = data;
-	const artist = {
-		name,
-		url: external_urls.spotify,
-		img: images[0].url,
-		followers: followers.total,
-		popularity,
-	};
-	console.log("Artist:", artist);
-
-	return artist;
-};
 const App = () => {
 	const [token, setToken] = useRecoilState(tokenState);
 	const [currentArtistID, setCurrentArtistID] =
 		useRecoilState(currentArtistIDState);
-	const [currentArtistData, setCurrentArtistData] = useRecoilState(
-		currentArtistDataState
-	);
+	const setCurrentArtistData = useSetRecoilState(currentArtistDataState);
 
 	useEffect(() => {
 		fetchToken(REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET)
@@ -80,11 +56,15 @@ const App = () => {
 
 	useEffect(() => {
 		if (token) {
-			fetchSpArtist(currentArtistID, token)
-				.then((data) => {
-					setCurrentArtistData(data);
-				})
-				.catch((err) => console.log("Error when fetching artist:", err));
+			(async () => {
+				const [artist, tracks] = await Promise.all([
+					fetchSpArtist(currentArtistID, token),
+					fetchDbArtist(),
+				]);
+				const data = { ...artist, tracks };
+				setCurrentArtistData(data);
+				console.log("ArtistData:", data);
+			})();
 		}
 	}, [currentArtistID]);
 
