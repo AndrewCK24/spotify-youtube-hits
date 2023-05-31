@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-// import { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import currentArtistDataState from "../../recoil/atoms/currentArtistDataState";
 
 // import Skeleton from "../misc/Skeleton";
+import { BsPersonCircle } from "react-icons/bs";
 import { RiUserFollowFill } from "react-icons/ri";
 import { FaAssistiveListeningSystems, FaTemperatureHigh } from "react-icons/fa";
 
@@ -19,12 +19,20 @@ const Container = styled.div`
 	padding: 0.5rem;
 `;
 
-const ArtistImage = styled.img`
+const ArtistImg = styled.img`
 	max-width: 6rem;
 	min-width: 4rem;
 	max-height: 6rem;
 	min-height: 4rem;
 	border-radius: 50%;
+`;
+
+const ArtistImgPlaceholder = styled(BsPersonCircle)`
+	max-width: 6rem;
+	min-width: 4rem;
+	max-height: 6rem;
+	min-height: 4rem;
+	color: var(--white-secondary);
 `;
 
 const ArtistInfo = styled.div`
@@ -64,9 +72,7 @@ const Text = styled.div`
 `;
 
 const ArtistProfile = () => {
-	const [currentArtistData, setCurrentArtistData] = useRecoilState(
-		currentArtistDataState
-	);
+	const currentArtistData = useRecoilValue(currentArtistDataState);
 	const { name, external_urls, images, followers, popularity } =
 		currentArtistData;
 
@@ -77,7 +83,7 @@ const ArtistProfile = () => {
 	if (Object.keys(currentArtistData).length !== 0) {
 		return (
 			<Container>
-				<ArtistImage src={images[0].url} alt={name + " profile picture"} />
+				<ArtistImg src={images[0].url} alt={name + " profile picture"} />
 				<ArtistInfo>
 					<Name href={external_urls.spotify}>{name}</Name>
 					<Details>
@@ -98,7 +104,12 @@ const ArtistProfile = () => {
 			</Container>
 		);
 	} else {
-		return <Container>{/* <Skeleton /> */}</Container>;
+		return (
+			<Container>
+				<ArtistImgPlaceholder />
+				{/* <Skeleton /> */}
+			</Container>
+		);
 	}
 };
 
