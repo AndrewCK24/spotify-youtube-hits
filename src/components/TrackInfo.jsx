@@ -7,7 +7,7 @@ import FeatureSection from "./TrackInfo/FeatureSection";
 
 const Container = styled.main`
 	/* max-width: 49rem; */
-	min-width: 37rem;
+	/* min-width: 37rem; */
 	height: 95%;
 	padding: 2.5% 0;
 	overflow-y: scroll;
@@ -17,14 +17,16 @@ const Container = styled.main`
 `;
 
 const ChartSection = styled.section`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-column-gap: 1rem;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: left;
+	align-items: stretch;
 `;
 
 const ChartContainer = styled.div`
-	/* max-width: 24rem; */
-	min-width: 18rem;
+	flex: 1 1 18rem;
 	min-height: 18rem;
 	max-height: 20rem;
 	display: grid;

@@ -68,8 +68,8 @@ export default class Popularity extends PureComponent {
 		return (
 			<ResponsiveContainer width="100%" height="100%">
 				<ComposedChart
-					width={480}
-					height={320}
+					width={1}
+					height={1}
 					data={data}
 					margin={{
 						top: 16,
@@ -99,7 +99,7 @@ export default class Popularity extends PureComponent {
 						stroke="#148255"
 						dot={true}
 					/>
-					<Bar dataKey="youtubeViews" barSize={20} fill="#b30000" />
+					<Bar dataKey="youtubeViews" barSize={20} fill="#93ffd4" />
 				</ComposedChart>
 			</ResponsiveContainer>
 		);

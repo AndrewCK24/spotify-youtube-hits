@@ -25,10 +25,10 @@ const AlbumImg = styled.img`
 `;
 
 const DetailContainer = styled.div`
-  height: 100%;
+	height: 100%;
 	display: grid;
 	grid-template-rows: auto 1fr;
-  grid-gap: 0.5rem;
+	grid-gap: 0.5rem;
 	a {
 		text-decoration: none;
 		white-space: nowrap;
@@ -50,13 +50,25 @@ const TrackName = styled.a`
 `;
 
 const Details = styled.div`
-	display: grid;
-	grid-template-columns: auto 1fr;
-	grid-column-gap: 1rem;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: left;
 	align-items: start;
+	gap: 0.5rem;
+`;
+
+const Info = styled.div`
+	flex: 1 1 12rem;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: start;
+	align-items: center;
 `;
 
 const AlbumName = styled.a`
+	flex: 1 1 auto;
 	width: fit-content;
 	display: flex;
 	align-items: center;
@@ -69,6 +81,7 @@ const AlbumName = styled.a`
 `;
 
 const DetailText = styled.div`
+	flex: 1 1 auto;
 	display: flex;
 	align-items: center;
 	gap: 0.25rem;
@@ -87,6 +100,7 @@ const TrackDetail = () => {
 					Feel Good Inc.
 				</TrackName>
 				<Details>
+					<Info>
 					<AlbumName href="https://open.spotify.com/album/0bUTHlWbkSQysoM3VsWldT">
 						<RiAlbumLine />
 						Demon Days
@@ -95,6 +109,17 @@ const TrackDetail = () => {
 						<MdOutlineDateRange />
 						2005
 					</DetailText>
+					<DetailText>
+						<MdAccessTime />
+						3:41
+					</DetailText>
+					</Info>
+					<Info>
+					<DetailText>
+						<MdOutlineDateRange />
+						2005
+					</DetailText>
+					</Info>
 				</Details>
 			</DetailContainer>
 		</Container>
