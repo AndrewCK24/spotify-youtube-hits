@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useRecoilValue } from "recoil";
 
 import currentTrackKeyState from "../../recoil/atoms/currentTrackKeyState";
+import currentTrackDataState from "../../recoil/atoms/currentTrackDataState";
 import { RiAlbumLine } from "react-icons/ri";
 import { MdOutlineDateRange, MdAccessTime } from "react-icons/md";
 
@@ -92,44 +93,53 @@ const DetailText = styled.div`
 `;
 
 const TrackDetail = () => {
-	// TODO: 將資料改為 getTrackByIdSelector 的資料
 	const currentTrackKey = useRecoilValue(currentTrackKeyState);
+	const currentTrackData = useRecoilValue(currentTrackDataState);
+	const {
+		name,
+		url,
+		albumName,
+		albumImg,
+		albumUrl,
+		albumReleaseDate,
+		duration,
+	} = currentTrackData;
 
-	return (
-		<Container>
-			<AlbumImg
-				src="https://i.scdn.co/image/ab67616d0000b27319d85a472f328a6ed9b704cf"
-				alt="albumName"
-			/>
-			<DetailContainer>
-				<TrackName href="https://open.spotify.com/track/0d28khcov6AiegSCpG5TuT">
-					Feel Good Inc.
-				</TrackName>
-				<Details>
-					<Info>
-					<AlbumName href="https://open.spotify.com/album/0bUTHlWbkSQysoM3VsWldT">
-						<RiAlbumLine />
-						Demon Days
-					</AlbumName>
-					<DetailText>
-						<MdOutlineDateRange />
-						2005
-					</DetailText>
-					<DetailText>
-						<MdAccessTime />
-						3:41
-					</DetailText>
-					</Info>
-					<Info>
-					<DetailText>
-						<MdOutlineDateRange />
-						{currentTrackKey}
-					</DetailText>
-					</Info>
-				</Details>
-			</DetailContainer>
-		</Container>
-	);
+	if (Object.keys(currentTrackData).length !== 0) {
+		return (
+			<Container>
+				<AlbumImg src={albumImg} alt={albumName + " album cover"} />
+				<DetailContainer>
+					<TrackName href={url}>{name}</TrackName>
+					<Details>
+						<Info>
+							<AlbumName href={albumUrl}>
+								<RiAlbumLine />
+								{albumName}
+							</AlbumName>
+							<DetailText>
+								<MdOutlineDateRange />
+								{albumReleaseDate}
+							</DetailText>
+							<DetailText>
+								<MdAccessTime />
+								{duration}
+							</DetailText>
+						</Info>
+						<Info>
+							<DetailText>
+								<MdOutlineDateRange />
+								{currentTrackKey}
+							</DetailText>
+						</Info>
+					</Details>
+				</DetailContainer>
+			</Container>
+		);
+	} else {
+		console.log(Object.keys(currentTrackData))
+		return <Container />;
+	}
 };
 
 export default TrackDetail;
