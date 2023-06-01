@@ -56,17 +56,15 @@ const TopTracks = () => {
 	const setCurrentTrackData = useSetRecoilState(currentTrackDataState);
 
 	const handleClick = async (key) => {
-		console.log(`No. ${key} track clicked`);
+		// console.log(`No. ${key} track clicked`);
 		setCurrentTrackKey(key);
-	
 		try {
-			const info = await fetchSpTrackInfo(tracks[key].id, token);
+			const info = await fetchSpTrackInfo(tracks[key].trackId, token);
 			setCurrentTrackData(info);
 		} catch (error) {
 			console.log("Error when fetching track info:", error);
 		}
 	};
-	
 
 	return (
 		<Container>
@@ -78,7 +76,7 @@ const TopTracks = () => {
 						disabled={currentTrackKey === id}
 						onClick={() => handleClick(id)}
 					>
-						{track.name}
+						{track.trackName}
 					</Track>
 				))}
 			</TrackContainer>

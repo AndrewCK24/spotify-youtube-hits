@@ -7,7 +7,6 @@ import dbDataState from "./recoil/atoms/dbDataState";
 import tokenState from "./recoil/atoms/tokenState";
 import currentArtistIDState from "./recoil/atoms/currentArtistIDState";
 import currentArtistDataState from "./recoil/atoms/currentArtistDataState";
-import currentTrackKeyState from "./recoil/atoms/currentTrackKeyState";
 import currentTrackDataState from "./recoil/atoms/currentTrackDataState";
 
 import TrackList from "./components/TrackList";
@@ -44,28 +43,35 @@ const fetchToken = async (clientId, clientSecret) => {
 };
 
 const App = () => {
-	const setDbData = useSetRecoilState(dbDataState);
+	const [dbData, setDbData] = useRecoilState(dbDataState);
 	const [token, setToken] = useRecoilState(tokenState);
 	const [currentArtistID, setCurrentArtistID] =
 		useRecoilState(currentArtistIDState);
 	const [currentArtistData, setCurrentArtistData] = useRecoilState(
 		currentArtistDataState
 	);
-	const [currentTrackKey, setCurrentTrackKey] =
-		useRecoilState(currentTrackKeyState);
 	const setCurrentTrackData = useSetRecoilState(currentTrackDataState);
 
 	useEffect(() => {
-		// 引入 dbData
-		fetchDbData(setDbData);
-		// 獲取 spotify api token
-		fetchToken(REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET)
-			.then((token) => {
+		const fetchData = async () => {
+			try {
+				// 同時發起兩個非同步請求
+				const [dbData, token] = await Promise.all([
+					fetchDbData(),
+					fetchToken(REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET),
+				]);
+
+				// 設定 dbData, token, currentArtistID
+				setDbData(dbData);
 				setToken(token);
 				setCurrentArtistID("3AA28KZvwAUcZuOKwyblJQ");
 				console.log("Token:", token);
-			})
-			.catch((err) => console.log("Error when accessing token:", err));
+			} catch (error) {
+				console.log("Error:", error);
+			}
+		};
+
+		fetchData();
 	}, [setToken]);
 
 	useEffect(() => {
@@ -73,12 +79,12 @@ const App = () => {
 			(async () => {
 				const [artist, tracks] = await Promise.all([
 					fetchSpArtist(currentArtistID, token),
-					fetchDbArtist(),
+					fetchDbArtist(currentArtistID, dbData),
 				]);
-				const artistData = { ...artist, tracks };
+				const artistData = { ...artist, tracks: tracks };
 				setCurrentArtistData(artistData);
 				console.log("ArtistData:", artistData);
-				const trackData = await fetchSpTrackInfo(tracks[0].id, token);
+				const trackData = await fetchSpTrackInfo(tracks[0].trackId, token);
 				setCurrentTrackData(trackData);
 				console.log("TrackData:", trackData);
 			})();
