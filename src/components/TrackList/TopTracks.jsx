@@ -1,7 +1,11 @@
 import styled from "@emotion/styled";
-import { useRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { fetchSpTrackInfo } from "../../hooks/useTrackAPI";
 
+import tokenState from "../../recoil/atoms/tokenState";
+import currentArtistDataState from "../../recoil/atoms/currentArtistDataState";
 import currentTrackKeyState from "../../recoil/atoms/currentTrackKeyState";
+import currentTrackDataState from "../../recoil/atoms/currentTrackDataState";
 
 const Container = styled.div`
 	border-radius: 1rem;
@@ -46,22 +50,35 @@ const trackData = [
 const TopTracks = () => {
 	const [currentTrackKey, setCurrentTrackKey] =
 		useRecoilState(currentTrackKeyState);
+	const token = useRecoilValue(tokenState);
+	const currentArtistData = useRecoilValue(currentArtistDataState);
+	const { tracks } = currentArtistData;
+	const setCurrentTrackData = useSetRecoilState(currentTrackDataState);
 
-	const handleClick = (key) => {
+	const handleClick = async (key) => {
 		console.log(`No. ${key} track clicked`);
 		setCurrentTrackKey(key);
+	
+		try {
+			const info = await fetchSpTrackInfo(tracks[key].id, token);
+			setCurrentTrackData(info);
+		} catch (error) {
+			console.log("Error when fetching track info:", error);
+		}
 	};
+	
 
 	return (
 		<Container>
 			<TrackContainer>
-				{trackData.map((song, id) => (
+				{tracks.map((track, id) => (
 					<Track
 						key={id}
 						className={currentTrackKey === id ? "toggled" : ""}
+						disabled={currentTrackKey === id}
 						onClick={() => handleClick(id)}
 					>
-						{song}
+						{track.name}
 					</Track>
 				))}
 			</TrackContainer>
