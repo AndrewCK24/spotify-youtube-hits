@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
 import { useRecoilValue } from "recoil";
 
+import currentArtistDataState from "../../recoil/atoms/currentArtistDataState";
 import currentTrackKeyState from "../../recoil/atoms/currentTrackKeyState";
 import currentTrackDataState from "../../recoil/atoms/currentTrackDataState";
 import { RiAlbumLine } from "react-icons/ri";
 import { MdOutlineDateRange, MdAccessTime } from "react-icons/md";
+import { AiFillFire } from "react-icons/ai";
+import { TbArrowBigUpLinesFilled } from "react-icons/tb";
 
 const Container = styled.section`
 	max-height: 9rem;
@@ -92,9 +95,28 @@ const DetailText = styled.div`
 	font-size: 1rem;
 `;
 
+const OnFire = styled(AiFillFire)`
+	color: var(--red-main);
+`;
+
+const Rising = styled(TbArrowBigUpLinesFilled)`
+	color: var(--green-main);
+`;
+
+const popularityIdentifier = (indicators) => {
+	const {actual, predict} = indicators;
+	if (actual === 1) {
+		return <OnFire />;
+	} else if (actual === 0 && predict === 1) {
+		return <Rising />;
+	}
+};
+
 const TrackDetail = () => {
+	const currentArtistData = useRecoilValue(currentArtistDataState);
 	const currentTrackKey = useRecoilValue(currentTrackKeyState);
 	const currentTrackData = useRecoilValue(currentTrackDataState);
+	const tracks = currentArtistData?.tracks;
 	const {
 		name,
 		url,
@@ -105,8 +127,10 @@ const TrackDetail = () => {
 		duration,
 	} = currentTrackData;
 
-	if (Object.keys(currentTrackData).length !== 0) {
-		return (
+	// FIXME: Empty container rendered 兩次
+	// if (Object.keys(currentTrackData).length !== 0 && tracks.length !== 0) {
+	if (tracks.length !== 0) {
+			return (
 			<Container>
 				<AlbumImg src={albumImg} alt={albumName + " album cover"} />
 				<DetailContainer>
@@ -128,8 +152,7 @@ const TrackDetail = () => {
 						</Info>
 						<Info>
 							<DetailText>
-								<MdOutlineDateRange />
-								{currentTrackKey}
+								{popularityIdentifier(tracks[currentTrackKey]?.indicators)}
 							</DetailText>
 						</Info>
 					</Details>
@@ -137,7 +160,7 @@ const TrackDetail = () => {
 			</Container>
 		);
 	} else {
-		console.log(Object.keys(currentTrackData))
+		console.log("Empty container rendered.")
 		return <Container />;
 	}
 };
