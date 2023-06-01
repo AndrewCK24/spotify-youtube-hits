@@ -3,14 +3,19 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "@emotion/styled";
 
 // import shared states
+import dbDataState from "./recoil/atoms/dbDataState";
 import tokenState from "./recoil/atoms/tokenState";
 import currentArtistIDState from "./recoil/atoms/currentArtistIDState";
 import currentArtistDataState from "./recoil/atoms/currentArtistDataState";
+import currentTrackKeyState from "./recoil/atoms/currentTrackKeyState";
+import currentTrackDataState from "./recoil/atoms/currentTrackDataState";
 
 import TrackList from "./components/TrackList";
 import TrackInfo from "./components/TrackInfo";
 import passKeys from "./env";
 import { fetchSpArtist, fetchDbArtist } from "./hooks/useArtistAPI";
+import { fetchSpTrackInfo } from "./hooks/useTrackAPI";
+import { fetchDbData } from "./hooks/useDbData";
 
 const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = passKeys();
 
@@ -39,12 +44,21 @@ const fetchToken = async (clientId, clientSecret) => {
 };
 
 const App = () => {
+	const setDbData = useSetRecoilState(dbDataState);
 	const [token, setToken] = useRecoilState(tokenState);
 	const [currentArtistID, setCurrentArtistID] =
 		useRecoilState(currentArtistIDState);
-	const setCurrentArtistData = useSetRecoilState(currentArtistDataState);
+	const [currentArtistData, setCurrentArtistData] = useRecoilState(
+		currentArtistDataState
+	);
+	const [currentTrackKey, setCurrentTrackKey] =
+		useRecoilState(currentTrackKeyState);
+	const setCurrentTrackData = useSetRecoilState(currentTrackDataState);
 
 	useEffect(() => {
+		// 引入 dbData
+		fetchDbData(setDbData);
+		// 獲取 spotify api token
 		fetchToken(REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET)
 			.then((token) => {
 				setToken(token);
@@ -61,9 +75,12 @@ const App = () => {
 					fetchSpArtist(currentArtistID, token),
 					fetchDbArtist(),
 				]);
-				const data = { ...artist, tracks };
-				setCurrentArtistData(data);
-				console.log("ArtistData:", data);
+				const artistData = { ...artist, tracks };
+				setCurrentArtistData(artistData);
+				console.log("ArtistData:", artistData);
+				const trackData = await fetchSpTrackInfo(tracks[0].id, token);
+				setCurrentTrackData(trackData);
+				console.log("TrackData:", trackData);
 			})();
 		}
 	}, [currentArtistID]);
