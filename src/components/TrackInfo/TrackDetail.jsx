@@ -103,11 +103,10 @@ const Rising = styled(TbArrowBigUpLinesFilled)`
 	color: var(--green-main);
 `;
 
-const popularityIdentifier = (indicators) => {
-	const {actual, predict} = indicators;
-	if (actual === 1) {
+const popularityIdentifier = (indicator) => {
+	if (indicator === 1) {
 		return <OnFire />;
-	} else if (actual === 0 && predict === 1) {
+	} else if (indicator === 2) {
 		return <Rising />;
 	}
 };
