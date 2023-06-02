@@ -66,7 +66,7 @@ const App = () => {
 				// 設定 dbData, token, currentArtistID
 				setDbData(dbData);
 				setToken(token);
-				setCurrentArtistID("1snhtMLeb2DYoMOcVbb8iB");
+				setCurrentArtistID("5Dl3HXZjG6ZOWT5cV375lk");
 				console.log("Token:", token);
 			} catch (error) {
 				console.log("Error:", error);

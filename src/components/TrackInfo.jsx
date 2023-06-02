@@ -12,7 +12,7 @@ const Container = styled.main`
 	padding: 2.5% 0;
 	overflow-y: scroll;
 	display: grid;
-	grid-template-rows: auto auto 1fr;
+	grid-template-rows: auto auto auto;
 	grid-row-gap: 1.5rem;
 `;
 
@@ -21,7 +21,7 @@ const ChartSection = styled.section`
 	flex-direction: row;
 	flex-wrap: wrap;
 	gap: 1rem;
-	justify-content: left;
+	justify-content: center;
 	align-items: stretch;
 `;
 

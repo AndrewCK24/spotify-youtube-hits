@@ -30,6 +30,7 @@ const AlbumImg = styled.img`
 `;
 
 const DetailContainer = styled.div`
+	max-width: 24rem;
 	width: 100%;
 	height: 100%;
 	display: grid;
@@ -65,23 +66,12 @@ const Details = styled.div`
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: left;
-	align-items: start;
-	gap: 0.5rem;
-`;
-
-const Info = styled.div`
-	flex: 1 1 auto;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: start;
 	align-items: start;
 	gap: 0.5rem;
 `;
 
 const AlbumName = styled.a`
-	flex: 1 1 auto;
+	/* flex: 1 1 auto; */
 	width: fit-content;
 	display: flex;
 	align-items: center;
@@ -90,6 +80,7 @@ const AlbumName = styled.a`
 	text-overflow: ellipsis;
 	gap: 0.25rem;
 	font-size: 1rem;
+	font-weight: 700;
 	color: var(--white-secondary);
 	&:hover {
 		color: var(--white-primary);
@@ -97,7 +88,7 @@ const AlbumName = styled.a`
 `;
 
 const DetailText = styled.div`
-	flex: 1 1 auto;
+	/* flex: 1 1 3rem; */
 	display: flex;
 	align-items: center;
 	gap: 0.25rem;
@@ -105,20 +96,27 @@ const DetailText = styled.div`
 `;
 
 const OnFire = styled(AiFillFire)`
-	font-size: 2rem;
 	color: var(--red-main);
 `;
 
 const Rising = styled(TbArrowBigUpLinesFilled)`
-	font-size: 2rem;
 	color: var(--green-main);
 `;
+
+const textSlicer = (text, length) => {
+	if (text.length > length) {
+		return text.slice(0, length) + "...";
+	}
+	return text;
+};
 
 const popularityIdentifier = (indicator) => {
 	if (indicator === 1) {
 		return <OnFire />;
 	} else if (indicator === 2) {
 		return <Rising />;
+	} else {
+		return <RiAlbumLine />;
 	}
 };
 
@@ -144,24 +142,19 @@ const TrackDetail = () => {
 			<Container>
 				<AlbumImg src={albumImg} alt={albumName + " album cover"} />
 				<DetailContainer>
-					<TrackName href={url}>{name}</TrackName>
+					<TrackName href={url}>{textSlicer(name, 24)}</TrackName>
 					<Details>
-						<Info>
-							<AlbumName href={albumUrl}>
-								<RiAlbumLine />
-								{albumName}
-							</AlbumName>
-							<DetailText>
-								<MdOutlineDateRange />
-								{albumReleaseDate}
-							</DetailText>
-							<DetailText>
-								<MdAccessTime />
-								{duration}
-							</DetailText>
-						</Info>
-						<DetailText>
+						<AlbumName href={albumUrl}>
 							{popularityIdentifier(tracks[currentTrackKey]?.indicator)}
+							{textSlicer(albumName, 18)}
+						</AlbumName>
+						<DetailText>
+							<MdOutlineDateRange />
+							{albumReleaseDate}
+						</DetailText>
+						<DetailText>
+							<MdAccessTime />
+							{duration}
 						</DetailText>
 					</Details>
 				</DetailContainer>
