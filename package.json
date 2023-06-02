@@ -1,7 +1,6 @@
 {
   "name": "spotify-youtube-hits",
   "private": true,
-  "homepage": "https://AndrewCk24.github.io/spotify-youtube-hits",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -13,13 +12,11 @@
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
-    "axios": "^1.4.0",
+    "dotenv": "^16.1.3",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "react-router-dom": "^6.11.2",
-    "react-spotify-api": "^3.0.0",
     "recharts": "^2.6.2",
     "recoil": "^0.7.7",
     "vite-plugin-svgr": "^3.2.0"

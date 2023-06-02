@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "@emotion/styled";
 
 // import shared states
@@ -12,12 +12,11 @@ import currentTrackDataState from "./recoil/atoms/currentTrackDataState";
 
 import TrackList from "./components/TrackList";
 import TrackInfo from "./components/TrackInfo";
-import passKeys from "./env";
 import { fetchSpArtist, fetchDbByArtistId } from "./hooks/useArtistAPI";
 import { fetchSpTrackFeatures, fetchSpTrackInfo } from "./hooks/useTrackAPI";
-import { fetchDbData } from "./hooks/useDbData";
 
-const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = passKeys();
+const REACT_APP_CLIENT_ID = import.meta.env.VITE_REACT_APP_CLIENT_ID;
+const REACT_APP_CLIENT_SECRET = import.meta.env.VITE_REACT_APP_CLIENT_SECRET;
 
 const Container = styled.div`
 	width: 90%;
@@ -44,7 +43,7 @@ const fetchToken = async (clientId, clientSecret) => {
 };
 
 const App = () => {
-	const [dbData, setDbData] = useRecoilState(dbDataState);
+	const dbData = useRecoilValue(dbDataState);
 	const [token, setToken] = useRecoilState(tokenState);
 	const [currentArtistID, setCurrentArtistID] =
 		useRecoilState(currentArtistIDState);
@@ -58,16 +57,14 @@ const App = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				// 同時發起兩個非同步請求
-				const [dbData, token] = await Promise.all([
-					fetchDbData(),
-					fetchToken(REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET),
-				]);
-				// 設定 dbData, token, currentArtistID
-				setDbData(dbData);
+				const token = await fetchToken(
+					REACT_APP_CLIENT_ID,
+					REACT_APP_CLIENT_SECRET
+				);
+				// 設定 token, currentArtistID
 				setToken(token);
 				setCurrentArtistID("5Dl3HXZjG6ZOWT5cV375lk");
-				console.log("Token:", token);
+				// console.log("Token:", token);
 			} catch (error) {
 				console.log("Error:", error);
 			}
