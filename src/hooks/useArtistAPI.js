@@ -20,6 +20,22 @@ export const fetchSpArtist = async (artistId, token) => {
 	return artist;
 };
 
-export const fetchDbArtist = (currentArtistID, dbData) => {
+export const fetchDbByArtistId = (currentArtistID, dbData) => {
 	return dbData.filter((track) => track.artistId === currentArtistID);
+};
+
+export const fetchDbByArtistName = (artistName, dbData) => {
+  const artists = [];
+  const trackNames = new Set();
+
+  for (const track of dbData) {
+    if (track.artistName.includes(artistName)) {
+      if (!trackNames.has(track.artistName)) {
+        artists.push(track);
+        trackNames.add(track.artistName);
+      }
+    }
+  }
+
+  return artists;
 };

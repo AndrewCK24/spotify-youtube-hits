@@ -12,7 +12,7 @@ import currentTrackDataState from "./recoil/atoms/currentTrackDataState";
 import TrackList from "./components/TrackList";
 import TrackInfo from "./components/TrackInfo";
 import passKeys from "./env";
-import { fetchSpArtist, fetchDbArtist } from "./hooks/useArtistAPI";
+import { fetchSpArtist, fetchDbByArtistId } from "./hooks/useArtistAPI";
 import { fetchSpTrackFeatures, fetchSpTrackInfo } from "./hooks/useTrackAPI";
 import { fetchDbData } from "./hooks/useDbData";
 
@@ -78,7 +78,7 @@ const App = () => {
 			(async () => {
 				const [artist, tracks] = await Promise.all([
 					fetchSpArtist(currentArtistID, token),
-					fetchDbArtist(currentArtistID, dbData),
+					fetchDbByArtistId(currentArtistID, dbData),
 				]);
 				const artistData = { ...artist, tracks: tracks };
 				setCurrentArtistData(artistData);

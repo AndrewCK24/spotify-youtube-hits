@@ -65,3 +65,21 @@ export const fetchSpTrackFeatures = async (trackId, token) => {
 	// console.log("trackFeatures:", features);
 	return features;
 };
+
+// const useTrackAPI = (key, token) => {
+// 	const fetchData = async () => {
+// 		try {
+// 			const [trackInfo, trackFeatures] = await Promise.all([
+// 				fetchSpTrackInfo(tracks[key].trackId, token),
+// 				fetchSpTrackFeatures(tracks[key].trackId, token),
+// 			]);
+// 			const trackData = { ...trackInfo, features: trackFeatures };
+// 			setCurrentTrackData(trackData);
+// 			console.log("TrackData:", trackData);
+// 		} catch (error) {
+// 			console.log("Error when fetching track data:", error);
+// 		}
+// 	};
+
+// 	fetchData();
+// };
