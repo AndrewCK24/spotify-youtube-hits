@@ -5,9 +5,9 @@ export const intFormatter = (number) => {
   number = Math.round(number);
 
 	if (number > 1000000000) {
-		return (number / 1000000000).toFixed(1) + "B";
+		return (number / 1000000000).toFixed(0) + "B";
 	} else if (number > 1000000) {
-		return (number / 1000000).toFixed(1) + "M";
+		return (number / 1000000).toFixed(0) + "M";
 	} else if (number > 1000) {
 		return (number / 1000).toFixed(1) + "K";
 	} else {

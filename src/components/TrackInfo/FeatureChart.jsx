@@ -11,7 +11,7 @@ import {
 
 import currentTrackDataState from "../../recoil/atoms/currentTrackDataState";
 
-const dbRescale = (val) => (val + 60) / 60;
+const dbRescale = (val) => ((val + 60) / 60).toFixed(3);
 
 const FeatureChart = () => {
 	const currentTrackData = useRecoilValue(currentTrackDataState);
