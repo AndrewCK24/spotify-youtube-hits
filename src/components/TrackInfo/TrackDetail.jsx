@@ -24,13 +24,13 @@ const Container = styled.section`
 `;
 
 const AlbumImg = styled.img`
-	max-width: 7.5rem;
-	min-width: 4rem;
+	min-width: 7.5rem;
 	max-height: 7.5rem;
-	min-height: 4rem;
+	/* min-height: 7.5rem; */
 `;
 
 const DetailContainer = styled.div`
+	width: 100%;
 	height: 100%;
 	display: grid;
 	grid-template-rows: auto 1fr;
@@ -47,10 +47,14 @@ const DetailContainer = styled.div`
 `;
 
 const TrackName = styled.a`
+	max-width: 100%;
 	display: flex;
 	font-size: 1.5rem;
 	font-weight: 700;
 	align-items: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	color: var(--white-primary);
 	&:hover {
 		text-shadow: 0 0 0.5rem var(--white-primary);
@@ -67,7 +71,7 @@ const Details = styled.div`
 `;
 
 const Info = styled.div`
-	flex: 1 1 12rem;
+	flex: 1 1 auto;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -81,6 +85,9 @@ const AlbumName = styled.a`
 	width: fit-content;
 	display: flex;
 	align-items: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	gap: 0.25rem;
 	font-size: 1rem;
 	color: var(--white-secondary);
