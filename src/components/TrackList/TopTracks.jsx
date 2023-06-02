@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
-import { fetchSpTrackInfo } from "../../hooks/useTrackAPI";
+import { fetchSpTrackInfo, fetchSpTrackFeatures } from "../../hooks/useTrackAPI";
 
 import tokenState from "../../recoil/atoms/tokenState";
 import currentArtistDataState from "../../recoil/atoms/currentArtistDataState";
@@ -56,11 +56,15 @@ const TopTracks = () => {
 	const setCurrentTrackData = useSetRecoilState(currentTrackDataState);
 
 	const handleClick = async (key) => {
-		// console.log(`No. ${key} track clicked`);
 		setCurrentTrackKey(key);
 		try {
-			const info = await fetchSpTrackInfo(tracks[key].trackId, token);
-			setCurrentTrackData(info);
+				const [trackInfo, trackFeatures] = await Promise.all([
+					fetchSpTrackInfo(tracks[key].trackId, token),
+					fetchSpTrackFeatures(tracks[key].trackId, token),
+				]);
+				const trackData = { ...trackInfo, features: trackFeatures };
+				setCurrentTrackData(trackData);
+				console.log("TrackData:", trackData);
 		} catch (error) {
 			console.log("Error when fetching track info:", error);
 		}

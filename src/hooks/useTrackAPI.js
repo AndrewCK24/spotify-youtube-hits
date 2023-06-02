@@ -18,6 +18,50 @@ export const fetchSpTrackInfo = async (trackId, token) => {
 		albumReleaseDate: album?.release_date.split("-")[0],
 		duration: timeFormatter(duration_ms),
 	};
-	
+
 	return track;
+};
+
+export const fetchSpTrackFeatures = async (trackId, token) => {
+	const response = await fetch(
+		`https://api.spotify.com/v1/audio-features/${trackId}`,
+		{
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}
+	);
+	const data = await response.json();
+	const {
+		acousticness,
+		danceability,
+		energy,
+		instrumentalness,
+		key,
+		liveness,
+		loudness,
+		mode,
+		speechiness,
+		tempo,
+		time_signature,
+		valence,
+	} = data;
+
+	const features = {
+		acousticness,
+		danceability,
+		energy,
+		instrumentalness,
+		key,
+		liveness,
+		loudness,
+		mode,
+		speechiness,
+		tempo,
+		time_signature,
+		valence,
+	};
+	// console.log("trackFeatures:", features);
+	return features;
 };

@@ -13,7 +13,7 @@ import TrackList from "./components/TrackList";
 import TrackInfo from "./components/TrackInfo";
 import passKeys from "./env";
 import { fetchSpArtist, fetchDbArtist } from "./hooks/useArtistAPI";
-import { fetchSpTrackInfo } from "./hooks/useTrackAPI";
+import { fetchSpTrackFeatures, fetchSpTrackInfo } from "./hooks/useTrackAPI";
 import { fetchDbData } from "./hooks/useDbData";
 
 const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = passKeys();
@@ -60,7 +60,6 @@ const App = () => {
 					fetchDbData(),
 					fetchToken(REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET),
 				]);
-
 				// 設定 dbData, token, currentArtistID
 				setDbData(dbData);
 				setToken(token);
@@ -84,7 +83,11 @@ const App = () => {
 				const artistData = { ...artist, tracks: tracks };
 				setCurrentArtistData(artistData);
 				console.log("ArtistData:", artistData);
-				const trackData = await fetchSpTrackInfo(tracks[0].trackId, token);
+				const [trackInfo, trackFeatures] = await Promise.all([
+					fetchSpTrackInfo(tracks[0].trackId, token),
+					fetchSpTrackFeatures(tracks[0].trackId, token),
+				]);
+				const trackData = { ...trackInfo, features: trackFeatures };
 				setCurrentTrackData(trackData);
 				console.log("TrackData:", trackData);
 			})();

@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
+import { useRecoilValue } from "recoil";
 
+import currentArtistDataState from "../../recoil/atoms/currentArtistDataState";
+import currentTrackKeyState from "../../recoil/atoms/currentTrackKeyState";
 import numberFormatter from "../../utils/numberFormatter";
 
 const Container = styled.section`
