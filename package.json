@@ -1,6 +1,7 @@
 {
   "name": "spotify-youtube-hits",
   "private": true,
+  "homepage": "https://AndrewCk24.github.io/spotify-youtube-hits",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
