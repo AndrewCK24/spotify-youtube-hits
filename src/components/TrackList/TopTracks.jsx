@@ -21,7 +21,7 @@ const TrackContainer = styled.div`
 	display: grid;
 `;
 
-const Track = styled.button`
+export const Track = styled.button`
 	color: var(--white-primary);
 	background-color: transparent;
 	border: none;

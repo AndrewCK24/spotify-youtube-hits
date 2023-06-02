@@ -21,21 +21,27 @@ export const fetchSpArtist = async (artistId, token) => {
 };
 
 export const fetchDbByArtistId = (currentArtistID, dbData) => {
+	console.log("dbData", Array.isArray(dbData), dbData);
 	return dbData.filter((track) => track.artistId === currentArtistID);
 };
 
-export const fetchDbByArtistName = (artistName, dbData) => {
-  const artists = [];
-  const trackNames = new Set();
+export const fetchDbByArtistName = (input, dbData) => {
+	if (!input) {
+		return [];
+	}
+	const artists = [];
+	const trackNames = new Set();
 
-  for (const track of dbData) {
-    if (track.artistName.includes(artistName)) {
-      if (!trackNames.has(track.artistName)) {
-        artists.push(track);
-        trackNames.add(track.artistName);
-      }
-    }
-  }
+	dbData.map((track) => {
+		const artistNameLower = track.artistName.toLowerCase();
+		const inputLower = input.toLowerCase();
+		if (artistNameLower.startsWith(inputLower)) {
+			if (!trackNames.has(artistNameLower)) {
+				artists.push(track);
+				trackNames.add(artistNameLower);
+			}
+		}
+	});
 
-  return artists;
+	return artists.slice(0, 10);
 };

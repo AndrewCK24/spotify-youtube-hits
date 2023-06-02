@@ -7,6 +7,7 @@ import dbDataState from "./recoil/atoms/dbDataState";
 import tokenState from "./recoil/atoms/tokenState";
 import currentArtistIDState from "./recoil/atoms/currentArtistIDState";
 import currentArtistDataState from "./recoil/atoms/currentArtistDataState";
+import currentTrackKeyState from "./recoil/atoms/currentTrackKeyState";
 import currentTrackDataState from "./recoil/atoms/currentTrackDataState";
 
 import TrackList from "./components/TrackList";
@@ -50,6 +51,8 @@ const App = () => {
 	const [currentArtistData, setCurrentArtistData] = useRecoilState(
 		currentArtistDataState
 	);
+	const [currentTrackKey, setCurrentTrackKey] =
+		useRecoilState(currentTrackKeyState);
 	const setCurrentTrackData = useSetRecoilState(currentTrackDataState);
 
 	useEffect(() => {
@@ -83,9 +86,10 @@ const App = () => {
 				const artistData = { ...artist, tracks: tracks };
 				setCurrentArtistData(artistData);
 				console.log("ArtistData:", artistData);
+				setCurrentTrackKey(0);
 				const [trackInfo, trackFeatures] = await Promise.all([
-					fetchSpTrackInfo(tracks[0].trackId, token),
-					fetchSpTrackFeatures(tracks[0].trackId, token),
+					fetchSpTrackInfo(tracks[currentTrackKey].trackId, token),
+					fetchSpTrackFeatures(tracks[currentTrackKey].trackId, token),
 				]);
 				const trackData = { ...trackInfo, features: trackFeatures };
 				setCurrentTrackData(trackData);
