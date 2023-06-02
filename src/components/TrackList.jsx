@@ -31,6 +31,7 @@ const SearchSwitch = styled.div`
 
 const SearchResults = styled.div`
 	display: grid;
+	padding: 0 0.75rem;
 `;
 
 const TrackList = () => {
