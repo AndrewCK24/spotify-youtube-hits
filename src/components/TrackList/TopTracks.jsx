@@ -12,7 +12,7 @@ const Container = styled.div`
 	display: grid;
 	grid-template-rows: auto 1fr;
 	align-items: center;
-	overflow: hidden;
+	overflow-y: scroll;
 	padding: 0.75rem;
 	background-color: var(--black-secondary);
 `;
