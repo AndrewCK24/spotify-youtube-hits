@@ -47,8 +47,10 @@ const DetailContainer = styled.div`
 `;
 
 const TrackName = styled.a`
+	display: flex;
 	font-size: 1.5rem;
 	font-weight: 700;
+	align-items: center;
 	color: var(--white-primary);
 	&:hover {
 		text-shadow: 0 0 0.5rem var(--white-primary);
@@ -67,10 +69,10 @@ const Details = styled.div`
 const Info = styled.div`
 	flex: 1 1 12rem;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap;
 	justify-content: start;
-	align-items: center;
+	align-items: start;
 	gap: 0.5rem;
 `;
 
@@ -96,10 +98,12 @@ const DetailText = styled.div`
 `;
 
 const OnFire = styled(AiFillFire)`
+	font-size: 2rem;
 	color: var(--red-main);
 `;
 
 const Rising = styled(TbArrowBigUpLinesFilled)`
+	font-size: 2rem;
 	color: var(--green-main);
 `;
 
@@ -129,7 +133,7 @@ const TrackDetail = () => {
 	// FIXME: Empty container rendered 兩次
 	// if (Object.keys(currentTrackData).length !== 0 && tracks.length !== 0) {
 	if (tracks.length !== 0) {
-			return (
+		return (
 			<Container>
 				<AlbumImg src={albumImg} alt={albumName + " album cover"} />
 				<DetailContainer>
@@ -149,17 +153,15 @@ const TrackDetail = () => {
 								{duration}
 							</DetailText>
 						</Info>
-						<Info>
-							<DetailText>
-								{popularityIdentifier(tracks[currentTrackKey]?.indicators)}
-							</DetailText>
-						</Info>
+						<DetailText>
+							{popularityIdentifier(tracks[currentTrackKey]?.indicator)}
+						</DetailText>
 					</Details>
 				</DetailContainer>
 			</Container>
 		);
 	} else {
-		console.log("Empty container rendered.")
+		console.log("Empty container rendered.");
 		return <Container />;
 	}
 };

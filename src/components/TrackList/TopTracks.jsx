@@ -38,15 +38,6 @@ const Track = styled.button`
 	}
 `;
 
-const trackData = [
-	"Feel Good Inc.",
-	"Clint Eastwood",
-	"Rhinestone Eyes",
-	"On Melancholy Hill",
-	"DARE",
-	"She's My Collar (feat. Kali Uchis)",
-];
-
 const TopTracks = () => {
 	const [currentTrackKey, setCurrentTrackKey] =
 		useRecoilState(currentTrackKeyState);
@@ -66,7 +57,7 @@ const TopTracks = () => {
 				setCurrentTrackData(trackData);
 				console.log("TrackData:", trackData);
 		} catch (error) {
-			console.log("Error when fetching track info:", error);
+			console.log("Error when fetching track data:", error);
 		}
 	};
 

@@ -10,7 +10,7 @@ import {
 	ResponsiveContainer,
 } from "recharts";
 
-import numberFormatter from "../../utils/numberFormatter";
+import { intFormatter } from "../../utils/numberFormatter";
 
 const data = [
 	{
@@ -89,7 +89,7 @@ export default class Popularity extends PureComponent {
 						type="number"
 						dataKey="spotifyPlayCount"
 						name="Play Count"
-						tickFormatter={numberFormatter}
+						tickFormatter={intFormatter}
 					/>
 					<Tooltip cursor={{ strokeDasharray: "3 3" }} />
 					<Area
