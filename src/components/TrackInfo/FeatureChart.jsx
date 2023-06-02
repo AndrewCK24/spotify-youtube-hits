@@ -1,4 +1,4 @@
-import { PureComponent } from "react";
+import { useRecoilValue } from "recoil";
 import {
 	Radar,
 	RadarChart,
@@ -9,69 +9,72 @@ import {
 	ResponsiveContainer,
 } from "recharts";
 
+import currentTrackDataState from "../../recoil/atoms/currentTrackDataState";
+
 const dbRescale = (val) => (val + 60) / 60;
 
-const data = [
-	{
-		feature: "Acousticness",
-		value: 0.00836,
-	},
-	{
-		feature: "Danceability",
-		value: 0.818,
-	},
-	{
-		feature: "Energy",
-		value: 0.705,
-	},
-	{
-		feature: "Instrumentalness",
-		value: 0.00233,
-	},
-	{
-		feature: "Liveness",
-		value: 0.613,
-	},
-	{
-		feature: "Loudness",
-		value: dbRescale(-5.484),
-	},
-	{
-		feature: "Speechiness",
-		value: 0.177,
-	},
-	{
-		feature: "Valence",
-		value: 0.772,
-	},
-];
+const FeatureChart = () => {
+	const currentTrackData = useRecoilValue(currentTrackDataState);
+	const features = currentTrackData?.features;
+	const data = [
+		{
+			feature: "Acousticness",
+			value: features?.acousticness,
+		},
+		{
+			feature: "Danceability",
+			value: features?.danceability,
+		},
+		{
+			feature: "Energy",
+			value: features?.energy,
+		},
+		{
+			feature: "Instrumentalness",
+			value: features?.instrumentalness,
+		},
+		{
+			feature: "Liveness",
+			value: features?.liveness,
+		},
+		{
+			feature: "Loudness",
+			value: dbRescale(features?.loudness),
+		},
+		{
+			feature: "Speechiness",
+			value: features?.speechiness,
+		},
+		{
+			feature: "Valence",
+			value: features?.valence,
+		},
+	];
+	return (
+		<ResponsiveContainer width="100%" height="100%">
+			<RadarChart
+				width={1}
+				height={1}
+				cx="50%"
+				cy="50%"
+				outerRadius="80%"
+				data={data}
+				fullMark={1}
+			>
+				<PolarGrid />
+				<PolarAngleAxis dataKey="feature" />
+				<PolarRadiusAxis />
+				<Tooltip />
+				<Radar
+					name="value"
+					dataKey="value"
+					stroke="#1db954"
+					fill="#1db954"
+					fillOpacity={0.6}
+				/>
+			</RadarChart>
+		</ResponsiveContainer>
+	);
+};
 
-export default class Example extends PureComponent {
-	render() {
-		return (
-			<ResponsiveContainer width="100%" height="100%">
-				<RadarChart
-					width={1}
-					height={1}
-					cx="50%"
-					cy="50%"
-					outerRadius="80%"
-					data={data}
-          fullMark={1}
-				>
-					<PolarGrid />
-					<PolarAngleAxis dataKey="feature" />
-					<PolarRadiusAxis />
-					<Tooltip />
-					<Radar
-						name="value"
-						dataKey="value"
-						stroke="#1db954"
-						fill="#1db954"
-						fillOpacity={0.6}
-					/>
-				</RadarChart>
-			</ResponsiveContainer>
-		);
-	}
-}
+export default FeatureChart;
