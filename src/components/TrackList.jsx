@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import { useRecoilValue, useRecoilState } from "recoil";
@@ -36,7 +36,7 @@ const SearchResults = styled.div`
 `;
 
 const TrackList = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const dbData = useRecoilValue(dbDataState);
 	const [currentArtistID, setCurrentArtistID] = useRecoilState(currentArtistIDState);
@@ -47,7 +47,7 @@ const TrackList = () => {
 	};
 	const handleClick = (id) => {
 		setCurrentArtistID(id);
-		navigate(`/spotify-youtube-hits/${currentArtistID}`);
+		// navigate(`/spotify-youtube-hits/${currentArtistID}`);
 		setFocus(false);
 	};
 

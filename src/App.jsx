@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 
 // import shared states
@@ -44,7 +44,7 @@ const fetchToken = async (clientId, clientSecret) => {
 };
 
 const App = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	// const location = useLocation();
 	// load shared states
 	const dbData = useRecoilValue(dbDataState);
@@ -75,7 +75,7 @@ const App = () => {
 	}, [setToken]);
 
 	useEffect(() => {
-		navigate(`/spotify-youtube-hits/${currentArtistID}`);
+		// navigate(`/spotify-youtube-hits/${currentArtistID}`);
 		if (token) {
 			(async () => {
 				const [artist, tracks] = await Promise.all([
