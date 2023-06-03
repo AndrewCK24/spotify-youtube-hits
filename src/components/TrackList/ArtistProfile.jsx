@@ -20,11 +20,10 @@ const Container = styled.div`
 `;
 
 const ArtistImg = styled.img`
-	max-width: 6rem;
-	min-width: 4rem;
-	max-height: 6rem;
-	min-height: 4rem;
+	width: 5.75rem;
+	height: 5.75rem;
 	border-radius: 50%;
+	object-fit: cover;
 `;
 
 const ArtistImgPlaceholder = styled(BsPersonCircle)`
