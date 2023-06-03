@@ -21,7 +21,6 @@ export const fetchSpArtist = async (artistId, token) => {
 };
 
 export const fetchDbByArtistId = (currentArtistID, dbData) => {
-	console.log("dbData", Array.isArray(dbData), dbData);
 	return dbData.filter((track) => track.artistId === currentArtistID);
 };
 

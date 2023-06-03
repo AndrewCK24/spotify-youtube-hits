@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 
 // import shared states
@@ -43,13 +44,13 @@ const fetchToken = async (clientId, clientSecret) => {
 };
 
 const App = () => {
+	const navigate = useNavigate();
+	// load shared states
 	const dbData = useRecoilValue(dbDataState);
 	const [token, setToken] = useRecoilState(tokenState);
 	const [currentArtistID, setCurrentArtistID] =
 		useRecoilState(currentArtistIDState);
-	const [currentArtistData, setCurrentArtistData] = useRecoilState(
-		currentArtistDataState
-	);
+	const setCurrentArtistData = useSetRecoilState(currentArtistDataState);
 	const [currentTrackKey, setCurrentTrackKey] =
 		useRecoilState(currentTrackKeyState);
 	const setCurrentTrackData = useSetRecoilState(currentTrackDataState);
@@ -64,7 +65,6 @@ const App = () => {
 				// 設定 token, currentArtistID
 				setToken(token);
 				setCurrentArtistID("5Dl3HXZjG6ZOWT5cV375lk");
-				// console.log("Token:", token);
 			} catch (error) {
 				console.log("Error:", error);
 			}
@@ -74,6 +74,7 @@ const App = () => {
 	}, [setToken]);
 
 	useEffect(() => {
+		navigate(`/${currentArtistID}`);
 		if (token) {
 			(async () => {
 				const [artist, tracks] = await Promise.all([

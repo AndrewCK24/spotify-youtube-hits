@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 import dbDataState from "../recoil/atoms/dbDataState";
 import currentArtistIDState from "../recoil/atoms/currentArtistIDState";
@@ -35,8 +36,10 @@ const SearchResults = styled.div`
 `;
 
 const TrackList = () => {
+	const navigate = useNavigate();
+
 	const dbData = useRecoilValue(dbDataState);
-	const setCurrentArtistID = useSetRecoilState(currentArtistIDState);
+	const [currentArtistID, setCurrentArtistID] = useRecoilState(currentArtistIDState);
 	const [focus, setFocus] = useState(false);
 	const [searchResults, setSearchResults] = useState([]);
 	const handleChange = (e) => {
@@ -44,7 +47,7 @@ const TrackList = () => {
 	};
 	const handleClick = (id) => {
 		setCurrentArtistID(id);
-		console.log("CurrentArtistID set!", id);
+		navigate(`/${currentArtistID}`);
 		setFocus(false);
 	};
 
