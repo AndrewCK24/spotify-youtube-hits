@@ -45,12 +45,18 @@ const PopularityChart = () => {
 				<Tooltip cursor={{ strokeDasharray: "3 3" }} />
 				<Area
 					dataKey="popularity.playCount"
+					name="play counts"
 					type="monotone"
 					fill="#148255"
 					stroke="#148255"
 					dot={true}
 				/>
-				<Bar dataKey="popularity.youtubeViews" barSize={20} fill="#93ffd4" />
+				<Bar
+					dataKey="popularity.youtubeViews"
+					name="youtube views"
+					barSize={20}
+					fill="#93ffd4"
+				/>
 			</ComposedChart>
 		</ResponsiveContainer>
 	);
