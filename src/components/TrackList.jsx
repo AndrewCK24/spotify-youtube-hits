@@ -47,7 +47,7 @@ const TrackList = () => {
 	};
 	const handleClick = (id) => {
 		setCurrentArtistID(id);
-		navigate(`/${currentArtistID}`);
+		navigate(`/spotify-youtube-hits/${currentArtistID}`);
 		setFocus(false);
 	};
 

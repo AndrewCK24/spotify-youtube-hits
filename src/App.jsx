@@ -45,6 +45,7 @@ const fetchToken = async (clientId, clientSecret) => {
 
 const App = () => {
 	const navigate = useNavigate();
+	// const location = useLocation();
 	// load shared states
 	const dbData = useRecoilValue(dbDataState);
 	const [token, setToken] = useRecoilState(tokenState);
@@ -74,7 +75,7 @@ const App = () => {
 	}, [setToken]);
 
 	useEffect(() => {
-		navigate(`/${currentArtistID}`);
+		navigate(`/spotify-youtube-hits/${currentArtistID}`);
 		if (token) {
 			(async () => {
 				const [artist, tracks] = await Promise.all([
@@ -95,6 +96,10 @@ const App = () => {
 			})();
 		}
 	}, [currentArtistID]);
+
+	// useEffect(() => {
+	// 	setCurrentArtistID(location.pathname.split("/")[2]);
+	// }, [location]);
 
 	return (
 		<Container>
