@@ -10,7 +10,7 @@ import SearchBar from "./TrackList/SearchBar";
 import { Track as Result } from "./TrackList/TopTracks";
 import ArtistProfile from "./TrackList/ArtistProfile";
 import TopTracks from "./TrackList/TopTracks";
-import ArtistList from "./TrackList/ArtistList";
+// import ArtistList from "./TrackList/ArtistList";
 
 const Container = styled.nav`
 	max-width: 24rem;
@@ -18,7 +18,7 @@ const Container = styled.nav`
 	height: 95%;
 	padding: 2.5% 0;
 	display: grid;
-	grid-template-rows: auto 1fr auto;
+	grid-template-rows: auto 1fr;
 	grid-row-gap: 1rem;
 	overflow: hidden;
 `;
@@ -50,7 +50,7 @@ const TrackList = () => {
 
 	return (
 		<Container>
-			<SearchBar handleChange={handleChange} setFocus={setFocus} />
+			<SearchBar handleChange={handleChange} focus={focus} setFocus={setFocus} />
 			{focus ? (
 				<SearchSwitch>
 					<SearchResults>
@@ -69,7 +69,7 @@ const TrackList = () => {
 					<TopTracks />
 				</SearchSwitch>
 			)}
-			<ArtistList />
+			{/* <ArtistList /> */}
 		</Container>
 	);
 };
