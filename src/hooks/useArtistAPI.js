@@ -34,13 +34,15 @@ export const fetchDbByArtistName = (input, dbData) => {
 	dbData.map((track) => {
 		const artistNameLower = track.artistName.toLowerCase();
 		const inputLower = input.toLowerCase();
-		if (artistNameLower.startsWith(inputLower)) {
-			if (!trackNames.has(artistNameLower)) {
-				artists.push(track);
-				trackNames.add(artistNameLower);
+		artistNameLower.split(" ").map((word) => {
+			if (word.startsWith(inputLower)) {
+				if (!trackNames.has(artistNameLower)) {
+					artists.push(track);
+					trackNames.add(artistNameLower);
+				}
 			}
-		}
+		});
 	});
 
-	return artists.slice(0, 10);
+	return artists.slice(0, 12);
 };
